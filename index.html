@@ -261,6 +261,16 @@
   </nav>
 
 <script>
+  // Retrieve product details from local storage, including the image URL
+const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+const productNames = cartItems.map(item => item.name).join(', '); // Get product names as a comma-separated string
+document.getElementById('productName').value = productNames; // Set product names to the input field
+// Calculate total amount including shipping fee
+const shippingFee = 0; // Example shipping fee
+const totalAmount = cartItems.reduce((total, item) => total + parseFloat(item.price), 0) + shippingFee;
+const totalElement = document.getElementById('totalAmount');
+totalElement.value = `৳${totalAmount.toFixed(2)}`; // Set total amount value to input field
+
   // Function to show loading animation
   function showLoadingAnimation() {
     document.getElementById('loadingOverlay').style.display = 'flex';
