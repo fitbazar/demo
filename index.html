@@ -319,6 +319,20 @@
         document.getElementById('orderForm').submit();
       }, 2000); // Adjust the delay as needed (milliseconds)
     });
+  // Function to handle visibility change
+function handleVisibilityChange() {
+  if (document.hidden) {
+    // Page is hidden, stop animation
+    document.getElementById('loadingOverlay').style.display = 'none';
+  } else {
+    // Page is visible again, resume animation
+    document.getElementById('loadingOverlay').style.display = 'flex';
+  }
+}
+
+// Add event listener for visibility change
+document.addEventListener('visibilitychange', handleVisibilityChange);
+
   </script>
 </body>
 </html>
