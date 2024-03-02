@@ -260,80 +260,42 @@
     </ul>
   </nav>
 
-  <script>
-    // JavaScript code for order page
-    // Function to show loading animation
-    function showLoadingAnimation() {
-      // Display the loading animation here
-      // For example, you can show a spinner or a modal overlay
-      // Make sure to style it according to your design
-    }
-
-    // Retrieve product details from local storage, including the image URL
-    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    const productNames = cartItems.map(item => item.name).join(', '); // Get product names as a comma-separated string
-    document.getElementById('productName').value = productNames; // Set product names to the input field
-    // Calculate total amount including shipping fee
-    const shippingFee = 0; // Example shipping fee
-    const totalAmount = cartItems.reduce((total, item) => total + parseFloat(item.price), 0) + shippingFee;
-    const totalElement = document.getElementById('totalAmount');
-    totalElement.value = `৳${totalAmount.toFixed(2)}`; // Set total amount value to input field
-
-    // Function to handle form submission
-    document.getElementById('orderForm').addEventListener('submit', function(event) {
-      // Prevent default form submission
-      event.preventDefault();
-      
-      // Check if all required fields are filled
-      const fullName = document.getElementById('fullName').value;
-      const phoneNumber = document.getElementById('phoneNumber').value;
-      const district = document.getElementById('district').value;
-      const thana = document.getElementById('thana').value;
-      const address = document.getElementById('address').value;
-      const paymentMethod = document.getElementById('payment_method').value;
-      const trxId = document.getElementById('trxId').value;
-
-      if (fullName && phoneNumber && district && thana && address && paymentMethod && trxId) {
-        // If all required fields are filled, show loading animation
-        showLoadingAnimation();
-        
-        // Submit the form
-        this.submit();
-      } else {
-        // If any required field is empty, display an error message or handle it as needed
-        alert('Please fill out all required fields.');
-      }
-    });
-  </script>
-
 <script>
-    document.getElementById('orderForm').addEventListener('submit', function(event) {
-      // Prevent default form submission
-      event.preventDefault();
-      
-      // Show loading overlay
-      document.getElementById('loadingOverlay').style.display = 'flex';
-      
-      // Submit the form after a short delay (to simulate processing)
-      setTimeout(function() {
-        document.getElementById('orderForm').submit();
-      }, 2000); // Adjust the delay as needed (milliseconds)
-    });
-
-// Function to handle visibility change
-function handleVisibilityChange() {
-  if (document.hidden) {
-    // Page is hidden, stop animation
-    document.getElementById('loadingOverlay').style.display = 'none';
-  } else {
-    // Page is visible again, resume animation
+  // Function to show loading animation
+  function showLoadingAnimation() {
     document.getElementById('loadingOverlay').style.display = 'flex';
   }
-}
 
-// Add event listener for visibility change
-document.addEventListener('visibilitychange', handleVisibilityChange);
+  // Function to hide loading animation
+  function hideLoadingAnimation() {
+    document.getElementById('loadingOverlay').style.display = 'none';
+  }
 
-  </script>
+  // Function to handle form submission
+  document.getElementById('orderForm').addEventListener('submit', function(event) {
+    // Prevent default form submission
+    event.preventDefault();
+    
+    // Show loading animation
+    showLoadingAnimation();
+
+    // Submit the form after a short delay (to simulate processing)
+    setTimeout(function() {
+      document.getElementById('orderForm').submit();
+    }, 2000); // Adjust the delay as needed (milliseconds)
+  });
+
+  // Function to handle visibility change
+  function handleVisibilityChange() {
+    if (document.hidden) {
+      // Page is hidden, stop animation
+      hideLoadingAnimation();
+    }
+  }
+
+  // Add event listener for visibility change
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+</script>
+
 </body>
 </html>
