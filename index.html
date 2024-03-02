@@ -224,10 +224,10 @@
         <input type="text" id="productName" name="productName" value="" readonly><br>
         <label for="totalAmount">Total Amount:</label>
         <input type="text" id="totalAmount" name="totalAmount" value="Total Amount" readonly><br>
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="orderconfirmed.html">
-        <button type="submit">confirm order</button>
       </div>
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="orderconfirmed.html">
+      <button type="submit">Confirm Order</button>
     </form>
   </main>
   
@@ -319,7 +319,8 @@
         document.getElementById('orderForm').submit();
       }, 2000); // Adjust the delay as needed (milliseconds)
     });
-  // Function to handle visibility change
+
+// Function to handle visibility change
 function handleVisibilityChange() {
   if (document.hidden) {
     // Page is hidden, stop animation
