@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-commerce Website</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding-bottom: 70px;
+  padding-top:140px;
+}
+
+header {
+  background-color: black;
+  color: orange;
+  padding: 10px 0;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  height : 120px;
+  top: 0;
+  z-index: 1000;
+}
+
+#search {
+  margin-top: 10px;
+}
+
+nav.nav--icons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 0.5em;
+  border-top: 2px solid #000;
+}
+
+nav.nav--icons:hover {
+  background-color: #f9f9f9; /* Change background color on hover */
+}
+
+nav.nav--icons ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+}
+
+nav.nav--icons ul li {
+  margin: 0 1px;
+}
+
+nav.nav--icons ul li a {
+  font-family: sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #000;
+  line-height: 1;
+  display: block;
+  padding: 0.75em 1.25em;
+  border-radius: 3em;
+  transition: 0.6s ease-in-out;
+}
+
+nav.nav--icons ul li a span {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  padding-left: 0.5em;
+  transition: opacity 0.6s, max-width 0.6s;
+  transition-timing-function: ease-in-out;
+}
+
+nav.nav--icons ul li a:hover,
+nav.nav--icons ul li a.is-active {
+  color: #fff;
+  background-color: #000;
+}
+
+nav.nav--icons ul li a:hover span,
+nav.nav--icons ul li a.is-active span {
+  opacity: 1;
+  max-width: 40px;
+}
+
+.product-box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.product {
+  width: calc(50% - 20px); /* Adjust width to fit two items per row */
+  max-width: 150px; /* Maximum width for individual product */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.product button {
+  margin-top: auto; /* Align button to the bottom */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.product button:hover {
+  background-color: #45a049;
+}
+
+
+
+    #successModal, #errorModal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      background-color: aqua;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #cartCounter {
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      margin-left: 5px;
+      vertical-align: middle; 
+      display: none; 
+    }
+
+    #search {
+      text-align: center;
+      margin: 20px;
+    }
+
+    #search input[type="text"] {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 20px; /* Adjust the border-radius for a more rounded shape */
+    }
+
+    #search button {
+      padding: 7px 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 20px; /* Adjust the border-radius to match the input */
+      cursor: pointer;
+    }
+
+    .notification {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 5px;
+      font-size: 12px;
+    }
+  
+  
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MONGREY SHOP</h1>
+    <div id="search">
+      <input type="text" id="searchInput" placeholder="Search by product name">
+     <button onclick="searchProduct()">Search</button>
+
+    </div>
+  </header>
+ 
+  
+  
+  
+  
+  
+ 
+  
+    
+      <div id="search-result">
+        <!-- Display search result here -->
+    </div>
+    
+  <div class="product-box"> <!-- Start product-box container -->
+    <div class="product">
+      <a href="milkshake.html">
+        <img src="https://raw.githubusercontent.com/healthycare0011/photo/main/milk shake.jpg" alt="Product 1">
+      </a>
+      <div class="product-name">Milk Shake</div>
+      <div class="product-price">৳990</div>
+      <button onclick="addToCart('Milk Shake', 990, 'https://raw.githubusercontent.com/healthycare0011/photo/main/milk shake.jpg')">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <a href="product2.html">
+        <img src="https://raw.githubusercontent.com/healthycare0011/photo/main/Protin plus.jpg" alt="Product 2">
+      </a>
+      <div class="product-name">Protien Plus</div>
+      <div class="product-price">990৳</div>
+      <button onclick="addToCart('Protien Plus', 990, 'https://raw.githubusercontent.com/healthycare0011/photo/main/Protin plus.jpg')">Add to Cart</button>
+    </div>
+  </div>
+
+
+    
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <p>Item added to cart successfully.</p>
+    </div>
+  </div>  
+
+  <div id="errorModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <p>This item is already added on the cart.</p>
+    </div>
+  </div>
+  
+  <nav class="nav nav--icons">
+    <ul>
+      <li>
+        <a href="#home">
+          <i class="fas fa-home" style="font-size: 24px;"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="cart.html">
+          <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
+          <span id="cartCounter">0</span>
+        </a>
+      </li>
+      <li>
+        <a href="contact.html">
+          <i class="fas fa-address-book" style="font-size: 24px;"></i>
+          <span>Contact</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <script>
+    var successModal = document.getElementById("successModal");
+    var errorModal = document.getElementById("errorModal");
+
+    var closeSuccessModal = successModal.getElementsByClassName("close")[0];
+    var closeErrorModal = errorModal.getElementsByClassName("close")[0];
+
+    closeSuccessModal.onclick = function() {
+      successModal.style.display = "none";
+    }
+
+    closeErrorModal.onclick = function() {
+      errorModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == successModal) {
+        successModal.style.display = "none";
+      }
+      if (event.target == errorModal) {
+        errorModal.style.display = "none";
+      }
+    }
+
+    function addToCart(productName, price, imageUrl) {
+      const cartItem = { name: productName, price: price, image: imageUrl };
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      const isAlreadyInCart = cart.some(item => item.name === productName);
+
+      if (isAlreadyInCart) {
+        errorModal.style.display = "block";
+      } else {
+        cart.push(cartItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCounter();
+        showCartNotification(); // Display cart notification instantly
+        successModal.style.display = "block";
+        autoClosePopup();
+      }
+    }
+
+    function updateCartCounter() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartCounter = document.getElementById('cartCounter');
+      if (cartCounter) {
+        if (cart.length > 0) {
+          cartCounter.style.display = 'inline-block';
+          cartCounter.textContent = cart.length; // Set cart counter to the total number of items in the cart
+        } else {
+          cartCounter.style.display = 'none';
+        }
+      }
+    }
+
+    function showCartNotification() {
+      const cartNotification = document.getElementById('cartNotification');
+      if (cartNotification) {
+        cartNotification.style.display = 'block';
+        setTimeout(function() {
+          cartNotification.style.display = 'none';
+        }, 2000); // Hide the notification after 2 seconds
+      }
+    }
+
+    function closePopup() {
+      successModal.style.display = "none";
+      errorModal.style.display = "none";
+    }
+
+    function autoClosePopup() {
+      setTimeout(closePopup, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCartCounter();
+    });
+
+    window.addEventListener("DOMContentLoaded", function() {
+      var cartDetails = document.getElementById("cart-details");
+      var cartCounter = document.getElementById("cartCounter");
+
+      // 
+      function updateCartCounter() {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cartCounter) {
+          if (cart.length > 0) {
+            cartCounter.style.display = 'inline-block';
+            cartCounter.textContent = cart.length;
+          } else {
+            cartCounter.style.display = 'none';
+          }
+        }
+      }
+
+    
+      cartDetails.addEventListener("click", function(event) {
+        event.stopPropagation(); // ইভেন্ট প্রসার বন্ধ করুন
+        cartDetails.classList.toggle("is-active"); // এনিমেশন টগল করুন
+      });
+
+   
+      document.addEventListener('DOMContentLoaded', function() {
+        updateCartCounter();
+      });
+    });
+    
+    function searchProduct() {
+  var input = document.getElementById("searchInput").value.toLowerCase();
+  var products = document.querySelectorAll(".product-name");
+
+  var searchResult = document.getElementById("search-result");
+  searchResult.innerHTML = "";
+
+  products.forEach(function(product) {
+    var productName = product.textContent.toLowerCase();
+    if (productName.includes(input)) {
+      searchResult.appendChild(product.parentNode.cloneNode(true));
+    }
+  });
+}
+
+    
+  </script>
+</body>
+</html>

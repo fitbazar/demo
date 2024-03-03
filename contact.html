@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding-bottom:50px;
+         
+    }
+
+    header {
+      background-color: black;
+      position: fixd;
+      color: orange;
+      padding: 10px 0;
+      text-align: center;
+      
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .social-icons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .social-icons a {
+      color: #333;
+      font-size: 24px;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .contact-form {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+      text-align: center;
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-form textarea {
+      height: 150px;
+    }
+
+    .contact-form input[type="submit"] {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .contact-form input[type="submit"]:hover {
+      background-color: #333;
+    }
+  nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    nav ul li a {
+      color: lime;
+      text-decoration: none;
+    }
+
+    nav ul li:last-child {
+      margin-right: 0;
+    }
+
+    nav ul li#cart-icon {
+      margin-right: 0;
+    }
+  
+    nav.nav--icons {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      padding: 0.5em;
+      border-top: 2px solid #000;
+    }
+
+    nav.nav--icons ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-around;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav.nav--icons ul li {
+      margin: 0 5px;
+    }
+
+    nav.nav--icons ul li a {
+      font-family: sans-serif;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: #000;
+      line-height: 1;
+      display: block;
+      padding: 0.75em 1.25em;
+      border-radius: 3em;
+      transition: 0.6s ease-in-out;
+    }
+
+    nav.nav--icons ul li a span {
+      display: inline-block;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      padding-left: 0.5em;
+      transition: opacity 0.6s, max-width 0.6s;
+      transition-timing-function: ease-in-out;
+    }
+
+    nav.nav--icons ul li a:hover,
+    nav.nav--icons ul li a.is-active {
+      color: #fff;
+      background-color: #000;
+    }
+
+    nav.nav--icons ul li a:hover span,
+    nav.nav--icons ul li a.is-active span {
+      opacity: 1;
+      max-width: 40px;
+    }
+  
+  #contact {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #contact h2 {
+            color: #8cc084;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+        }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contact Us</h1>
+  </header>
+
+  <div class="container">
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+
+    <h2>Contact Us</h2>
+        <div class="contact-info">
+            <p>Email: healthycare.info.bd@gmail.com</p>
+            <p>Phone: +8801776762354</p>
+            <p></p>
+        </div>
+    
+     <form id="orderForm" action="https://formsubmit.co/reymr1322@gmail.com" method="POST">
+    <div class="contact-form">
+      <form id="contactForm" action="#" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="#">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+    
+    <nav class="nav nav--icons">
+    <ul>
+        <li>
+            <a href="index.html">
+                <i class="fas fa-home" style="font-size: 24px;"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="cart.html">
+                <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
+                
+            </a>
+        </li>
+        
+        <li>
+            <a href="contact.html">
+                <i class="fas fa-address-book" style="font-size: 24px;"></i>
+                <span>Contact</span>
+            </a>
+        </li>
+    </ul>
+  </nav>
+
+  <script>
+    // You can add JavaScript for form submission or validation here if needed
+  </script>
+</body>
+</html>

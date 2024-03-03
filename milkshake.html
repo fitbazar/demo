@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milk Shake</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0 auto; /* Center the body horizontally */
+  padding-bottom: 100px;
+  padding-top:100px;
+  max-width: 1200px; /* Set a fixed maximum width for the body */
+}
+
+    header {
+      background-color: black;
+      color: orange;
+      padding: 10px 0;
+      text-align: center;
+       justify-content: text;
+      position: fixed;
+      width: 100%;
+      height : 80px;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    nav ul li a {
+      color: lime;
+      text-decoration: none;
+    }
+
+  nav ul li:last-child {
+  margin-right: 0; /* Remove margin from the last item */
+}
+
+nav ul li#cart-icon {
+  margin-right: 0; /* Remove margin from the cart icon */
+}
+  
+  nav.nav--icons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 0.5em;
+  border-top: 2px solid #000;
+  }
+
+    nav.nav--icons ul {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-around;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav.nav--icons ul li {
+      margin: 0 5px;
+    }
+
+    nav.nav--icons ul li a {
+      font-family: sans-serif;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: #000;
+      line-height: 1;
+      display: block;
+      padding: 0.75em 1.25em;
+      border-radius: 3em;
+      transition: 0.6s ease-in-out;
+    }
+
+    nav.nav--icons ul li a span {
+      display: inline-block;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      padding-left: 0.5em;
+      transition: opacity 0.6s, max-width 0.6s;
+      transition-timing-function: ease-in-out;
+    }
+
+    nav.nav--icons ul li a:hover,
+    nav.nav--icons ul li a.is-active {
+      color: #fff;
+      background-color: #000;
+    }
+
+    nav.nav--icons ul li a:hover span,
+    nav.nav--icons ul li a.is-active span {
+      opacity: 1;
+      max-width: 40px;
+    }
+    main {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .product-details {
+      margin: auto;
+      width: 90%;
+      height 80px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 3px;
+    }
+  
+  button {
+  background-color: #4CAF50; /* Green color */
+  color: white;
+  text-align: center;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green color on hover */
+}
+  
+ .product-description {
+  width: 80%; /* Fixed width for the description box */
+  margin: auto; /* Center the description box horizontally */
+  text-align: left; /* Align text to the left */
+  padding: 10px; /* Added padding for better spacing */
+}
+   
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+background-color: aqua;
+  position: absolute; /* Position the modal content */
+  top: 50%; /* Move the modal content to the vertical center */
+  left: 50%; /* Move the modal content to the horizontal center */
+  transform: translate(-50%, -50%); /* Center the modal content precisely */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  width: 70%; /* Adjust width as needed */
+  max-width: 500px; /* Set a maximum width if necessary */
+}
+
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #cartCounter {
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      margin-left: 5px;
+      vertical-align: middle; 
+      display: none; 
+    }
+  footer {
+  background-color: #333;
+  color: #fff;
+  text-align: Center;
+  padding: 10px 0;
+  width: 100%;
+  flex-shrink: 0; /* Prevent the footer from shrinking */
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Product Details</h1>
+   
+  </header>
+
+  <main>
+    <div class="product-details">
+      <h2>Product Name: Milk Shake</h2>
+      <img src="https://raw.githubusercontent.com/healthycare0011/photo/main/milk shake.jpg" alt="Milk Shake" width="300px" height="300px">
+      <h2>Price: ৳990</h2>
+     <button onclick="addToCart('Product 1', 10.00, 'https://raw.githubusercontent.com/healthycare0011/photo/main/milk shake.jpg')">Add to Cart</button>
+    </div>
+  </main>
+  
+  <main>
+  <div class="product-description">
+    <h3>Description:</h3>
+    <p> 🌿 'চিকন ও দুর্বল স্বাস্থ্য নিয়ে ভাবছেন❓
+➡️আর নয় ভাবনা🚫
+🌿 সম্পূর্ণ ☘️ন্যাচারাল🍀 উপায়ে কোনো প্রকার সাইড ইফেক্ট ছাড়া নিজেকে করে তুলুন ফিট ও স্মার্ট (স্থায়ী ভাবে)
+💪সুস্বা'স্থ্য থাকুন সব সময়। 
+🍀যারা শারীরিক ভাবে দুর্বল রোগ প্রতিরোধ ক্ষমতা  একেরারেই কম। ♻️তাদের জন্য আমাদের প্রাকৃতিক  উপাদানে তৈরি চকলেট শেক/মিল্ক শেক/বাদাম শেক/ওয়েট গে'ইন প্রোডাক্টটি, যার কোনো পার্শ্ব প্রতিক্রিয়া নেই।
+🍀যারা শারীরিক অতিরিক্ত মেদ সমস্যা নিয়ে চিন্তিত। ♻️তাদের জন্য আমাদের প্রাকৃতিক  উপাদানে তৈরি ডায়েট জুস, গ্রিন কফি / ওয়েট, লস প্রোডাক্টটি, যার কোনো পার্শ্ব প্রতিক্রিয়া নেই।
+💠100% কার্যকর অরিজিনাল পণ্য।
+💠এটি নারী ও পুরুষ উভয়ের জন্যই সমান কার্য'করী।
+♻️এটির কার্যকরীতা:-
+▪️স্থায়ীভাবে সুস্বাস্থ্য প্রদান করে /
+▪️ক্যালসিয়াম এর অভাব পূরন করে।
+▪️হজম শক্তি বৃদ্ধি করে।
+▪️শরীরের দুর্বলতা দূর করে।
+▪️বডি শেল উন্নত করে।
+▪️মাশেল তৈরি করে।
+▪️রুচিশীল এবং পুষ্টিকর করে।
+*বিঃদ্রঃ এটি সেবনে আলাদা ভাবে কোনো ডায়েট, এক্সেরসাইজ করতে হবে না।
+* এটি বাংলাদেশ বিএসটিআই কর্তৃক স্বীকৃত ও অনুমোদিত অর্থাৎ সম্পূর্ণ প্রাকৃতিক উপাদানে তৈরি তাই কোনো ধরণের সাইড ই-ফেক্ট নেই।
+
+  </div>
+</main>
+
+      
+  <div id="successModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Item added to cart successfully.</h2>
+  </div>
+</div>
+
+<div id="errorModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>This item is already added to the cart.</h2>
+  </div>
+</div>
+  
+  <nav class="nav nav--icons">
+    <ul>
+        <li>
+            <a href="index.html">
+                <i class="fas fa-home" style="font-size: 24px;"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="cart.html">
+                <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
+                <span id="cartCounter">0</span>
+            </a>
+        </li>
+        
+        <li>
+            <a href="contact.html">
+                <i class="fas fa-address-book" style="font-size: 24px;"></i>
+                <span>Contact</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<script>
+    var successModal = document.getElementById("successModal");
+    var errorModal = document.getElementById("errorModal");
+
+    var closeSuccessModal = successModal.getElementsByClassName("close")[0];
+    var closeErrorModal = errorModal.getElementsByClassName("close")[0];
+
+    closeSuccessModal.onclick = function() {
+      successModal.style.display = "none";
+    }
+
+    closeErrorModal.onclick = function() {
+      errorModal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == successModal) {
+        successModal.style.display = "none";
+      }
+      if (event.target == errorModal) {
+        errorModal.style.display = "none";
+      }
+    }
+
+    function addToCart(productName, price, imageUrl) {
+      const cartItem = { name: productName, price: price, image: imageUrl };
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      const isAlreadyInCart = cart.some(item => item.name === productName);
+
+      if (isAlreadyInCart) {
+        errorModal.style.display = "block";
+      } else {
+        cart.push(cartItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        successModal.style.display = "block";
+        updateCartCounter();
+        autoClosePopup();
+      }
+    }
+
+    function updateCartCounter() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartCounter = document.getElementById('cartCounter');
+      if (cartCounter) {
+        if (cart.length > 0) {
+          cartCounter.style.display = 'inline-block';
+          cartCounter.textContent = cart.length;
+        } else {
+          cartCounter.style.display = 'none';
+        }
+      }
+    }
+
+    
+    function closePopup() {
+      successModal.style.display = "none";
+      errorModal.style.display = "none";
+    }
+
+    function autoClosePopup() {
+      setTimeout(closePopup, 1000);
+    }
+
+    updateCartCounter();
+  </script>
+<script/>
+  function updateCartCounter() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cartCounter) {
+      if (cart.length > 0) {
+        cartCounter.style.display = 'inline-block';
+        cartCounter.textContent = cart.length;
+      } else {
+        cartCounter.style.display = 'none';
+      }
+    }
+  }
+
+  function closePopup() {
+    successModal.style.display = "none";
+    errorModal.style.display = "none";
+  }
+
+  function autoClosePopup() {
+    setTimeout(closePopup, 1000);
+  }
+
+  updateCartCounter();
+</script>
+</body>
+</html>
