@@ -117,8 +117,9 @@ nav.nav--icons ul li a.is-active span {
 }
 
 .product {
-  width: calc(50% - 20px); /* Adjust width to fit two items per row */
-  max-width: 150px; /* Maximum width for individual product */
+  width: calc(50% - 20px);
+  max-width: 150px;
+  height: 250px; /* Add a fixed height for consistent box size */
   border: 1px solid #ddd;
   border-radius: 5px;
   margin: 10px;
@@ -127,6 +128,7 @@ nav.nav--icons ul li a.is-active span {
   display: flex;
   flex-direction: column;
 }
+
 
 .product img {
   width: 100%;
@@ -241,7 +243,9 @@ nav.nav--icons ul li a.is-active span {
   
   
   
-  
+  <div id="noResultMessage" style="display: none; text-align: center; color: red;">
+    No matching items found.
+  </div>
  
   
     
@@ -430,33 +434,64 @@ nav.nav--icons ul li a.is-active span {
    function searchProduct() {
   var input = document.getElementById("searchInput").value.trim().toLowerCase();
   var products = document.querySelectorAll(".product-name");
-
   var searchResult = document.getElementById("search-result");
+  var noResultMessage = document.getElementById("noResultMessage");
+  
   searchResult.innerHTML = "";
-
+  noResultMessage.style.display = "none"; // Hide the message initially
+  
+  var found = false;
+  var foundProducts = []; // Array to store the found products
+  
   if (input !== "") {
-    products.forEach(function(product) {
+    var itemsPerRow = 2;
+    var itemsInCurrentRow = 0;
+    var rowContainer; // Variable to hold the current row container
+    var backButtonAdded = false; // Variable to track if back button is added
+    
+    products.forEach(function(product, index) {
       var productName = product.textContent.toLowerCase();
-      if (productName.includes(input)) {
-        searchResult.appendChild(product.parentNode.cloneNode(true));
+      if (productName.includes(input) && !foundProducts.includes(productName)) {
+        found = true;
+        foundProducts.push(productName);
+
+        // Create a new row container for the first product or when reaching the maximum items per row
+        if (itemsInCurrentRow === 0 || itemsInCurrentRow >= itemsPerRow) {
+          rowContainer = document.createElement("div");
+          rowContainer.classList.add("row-container");
+          searchResult.appendChild(rowContainer);
+          itemsInCurrentRow = 0;
+        }
+
+        // Clone the product and append it to the current row container
+        var clonedProduct = product.parentNode.cloneNode(true);
+        clonedProduct.querySelector("button").style.display = "block"; // Ensure the button is displayed
+        rowContainer.appendChild(clonedProduct);
+        itemsInCurrentRow++;
       }
     });
 
-    // Create and append the "back" button
-    var backButton = document.createElement("button");
-    backButton.id = "backButton";
-    backButton.textContent = "Back";
-    backButton.addEventListener("click", function() {
-      window.location.href = "index.html"; // Redirect to index.html
-    });
-    
-    searchResult.appendChild(backButton);
+    if (found) {
+      // Append the back button if not already added
+      if (!backButtonAdded) {
+        var backButton = document.createElement("button");
+        backButton.id = "backButton";
+        backButton.textContent = "Back";
+        backButton.addEventListener("click", function() {
+          window.location.href = "index.html"; // Redirect to index.html
+        });
+        searchResult.appendChild(backButton);
+        backButtonAdded = true;
+      }
+    } else {
+      noResultMessage.style.display = "block"; // Show the message if no matching items found
+    }
   } else {
     // Redirect to home or index page
     window.location.href = "index.html"; // Change the URL as needed
   }
 }
- 
+
   
   
   </script>
