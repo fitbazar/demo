@@ -431,7 +431,8 @@ nav.nav--icons ul li a.is-active span {
       });
     });
     
-   function searchProduct() {
+   
+  function searchProduct() {
   var input = document.getElementById("searchInput").value.trim().toLowerCase();
   var products = document.querySelectorAll(".product-name");
   var searchResult = document.getElementById("search-result");
@@ -444,56 +445,44 @@ nav.nav--icons ul li a.is-active span {
   var foundProducts = []; // Array to store the found products
   
   if (input !== "") {
-    var itemsPerRow = 2;
-    var itemsInCurrentRow = 0;
-    var rowContainer; // Variable to hold the current row container
-    var backButtonAdded = false; // Variable to track if back button is added
+    var itemsDisplayed = 0; // Counter for the number of items displayed
     
-    products.forEach(function(product, index) {
+    products.forEach(function(product) {
       var productName = product.textContent.toLowerCase();
       if (productName.includes(input) && !foundProducts.includes(productName)) {
         found = true;
         foundProducts.push(productName);
 
-        // Create a new row container for the first product or when reaching the maximum items per row
-        if (itemsInCurrentRow === 0 || itemsInCurrentRow >= itemsPerRow) {
-          rowContainer = document.createElement("div");
-          rowContainer.classList.add("row-container");
-          searchResult.appendChild(rowContainer);
-          itemsInCurrentRow = 0;
-        }
-
-        // Clone the product and append it to the current row container
+        // Clone the product and append it to the search result container
         var clonedProduct = product.parentNode.cloneNode(true);
         clonedProduct.querySelector("button").style.display = "block"; // Ensure the button is displayed
-        rowContainer.appendChild(clonedProduct);
-        itemsInCurrentRow++;
+        searchResult.appendChild(clonedProduct);
+        itemsDisplayed++;
+        
+        if (itemsDisplayed >= 1) {
+          // If one item is already displayed, stop further iterations
+          return;
+        }
       }
     });
 
     if (found) {
-      // Append the back button if not already added
-      if (!backButtonAdded) {
-        var backButton = document.createElement("button");
-        backButton.id = "backButton";
-        backButton.textContent = "Back";
-        backButton.addEventListener("click", function() {
-          window.location.href = "index.html"; // Redirect to index.html
-        });
-        searchResult.appendChild(backButton);
-        backButtonAdded = true;
-      }
+      // Append the back button
+      var backButton = document.createElement("button");
+      backButton.id = "backButton";
+      backButton.textContent = "Back";
+      backButton.addEventListener("click", function() {
+        window.location.reload(); // Reload the page to go back to the original state
+      });
+      searchResult.appendChild(backButton);
     } else {
       noResultMessage.style.display = "block"; // Show the message if no matching items found
     }
   } else {
-    // Redirect to home or index page
-    window.location.href = "index.html"; // Change the URL as needed
+    noResultMessage.style.display = "block"; // Show the message if the search input is empty
   }
 }
 
-  
-  
   </script>
 </body>
 </html>
