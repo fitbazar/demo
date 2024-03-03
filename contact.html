@@ -10,21 +10,14 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding-bottom:50px;
-         
+      padding-bottom: 50px;
     }
 
     header {
       background-color: black;
-      position: fixd;
       color: orange;
       padding: 10px 0;
       text-align: center;
-      
-    }
-
-    h1 {
-      margin: 0;
     }
 
     .container {
@@ -83,7 +76,8 @@
     .contact-form input[type="submit"]:hover {
       background-color: #333;
     }
-  nav ul {
+
+    nav ul {
       list-style-type: none;
       padding: 0;
     }
@@ -105,7 +99,7 @@
     nav ul li#cart-icon {
       margin-right: 0;
     }
-  
+
     nav.nav--icons {
       position: fixed;
       bottom: 0;
@@ -162,20 +156,57 @@
       opacity: 1;
       max-width: 40px;
     }
-  
-  #contact {
-            text-align: center;
-            margin: 20px;
-        }
 
-        #contact h2 {
-            color: #8cc084;
-        }
+    #contact {
+      text-align: center;
+      margin: 20px;
+    }
 
-        .contact-info {
-            margin-top: 10px;
-        }
+    #contact h2 {
+      color: #8cc084;
+    }
 
+    .contact-info {
+      margin-top: 10px;
+    }
+
+    #loadingOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid #fff;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #loadingOverlay p {
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -192,15 +223,13 @@
     </div>
 
     <h2>Contact Us</h2>
-        <div class="contact-info">
-            <p>Email: healthycare.info.bd@gmail.com</p>
-            <p>Phone: +8801776762354</p>
-            <p></p>
-        </div>
-    
-     <form id="orderForm" action="https://formsubmit.co/reymr1322@gmail.com" method="POST">
+    <div class="contact-info">
+      <p>Email: healthycare.info.bd@gmail.com</p>
+      <p>Phone: +8801776762354</p>
+    </div>
+
     <div class="contact-form">
-      <form id="contactForm" action="#" method="post">
+      <form id="contactForm" action="https://formsubmit.co/reymr1322@gmail.com" method="POST">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
@@ -209,39 +238,80 @@
 
         <label for="message">Message:</label>
         <textarea id="message" name="message" required></textarea>
-         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://fitbazar.github.io/demo/contact.html">
+
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="#">
+
         <input type="submit" value="Submit">
       </form>
     </div>
-  </div>
-    
+
+    <div id="loadingOverlay">
+      <div class="spinner"></div>
+      <p>submitting your message...</p>
+    </div>
+
     <nav class="nav nav--icons">
-    <ul>
+      <ul>
         <li>
-            <a href="index.html">
-                <i class="fas fa-home" style="font-size: 24px;"></i>
-                <span>Home</span>
-            </a>
+          <a href="index.html">
+            <i class="fas fa-home" style="font-size: 24px;"></i>
+            <span>Home</span>
+          </a>
         </li>
         <li>
-            <a href="cart.html">
-                <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
-                
-            </a>
+          <a href="cart.html">
+            <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
+          </a>
         </li>
-        
         <li>
-            <a href="contact.html">
-                <i class="fas fa-address-book" style="font-size: 24px;"></i>
-                <span>Contact</span>
-            </a>
+          <a href="contact.html">
+            <i class="fas fa-address-book" style="font-size: 24px;"></i>
+            <span>Contact</span>
+          </a>
         </li>
-    </ul>
-  </nav>
+      </ul>
+    </nav>
+  </div>
 
   <script>
-    // You can add JavaScript for form submission or validation here if needed
-  </script>
+  // JavaScript code here
+
+  // Function to show loading animation
+  function showLoadingAnimation() {
+    document.getElementById('loadingOverlay').style.display = 'flex';
+  }
+
+  // Function to hide loading animation
+  function hideLoadingAnimation() {
+    document.getElementById('loadingOverlay').style.display = 'none';
+  }
+
+  // Function to handle form submission
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+    // Prevent default form submission
+    event.preventDefault();
+    
+    // Show loading animation
+    showLoadingAnimation();
+
+    // Submit the form after a short delay (to simulate processing)
+    setTimeout(function() {
+      document.getElementById('contactForm').submit();
+    }, 2000); // Adjust the delay as needed (milliseconds)
+  });
+
+  // Function to handle visibility change
+  function handleVisibilityChange() {
+    if (document.hidden) {
+      // Page is hidden, stop animation
+      hideLoadingAnimation();
+    }
+  }
+
+  // Add event listener for visibility change
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+</script>
+
 </body>
 </html>
