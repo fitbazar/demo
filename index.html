@@ -29,6 +29,24 @@ header {
 #search {
   margin-top: 10px;
 }
+  
+
+#search-result {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#backButton {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: calc(0.7 * 96px); /* 1 inch = 96 pixels (standard DPI) */
+}
+
 
 nav.nav--icons {
   position: fixed;
@@ -409,22 +427,38 @@ nav.nav--icons ul li a.is-active span {
       });
     });
     
-    function searchProduct() {
-  var input = document.getElementById("searchInput").value.toLowerCase();
+   function searchProduct() {
+  var input = document.getElementById("searchInput").value.trim().toLowerCase();
   var products = document.querySelectorAll(".product-name");
 
   var searchResult = document.getElementById("search-result");
   searchResult.innerHTML = "";
 
-  products.forEach(function(product) {
-    var productName = product.textContent.toLowerCase();
-    if (productName.includes(input)) {
-      searchResult.appendChild(product.parentNode.cloneNode(true));
-    }
-  });
-}
+  if (input !== "") {
+    products.forEach(function(product) {
+      var productName = product.textContent.toLowerCase();
+      if (productName.includes(input)) {
+        searchResult.appendChild(product.parentNode.cloneNode(true));
+      }
+    });
 
+    // Create and append the "back" button
+    var backButton = document.createElement("button");
+    backButton.id = "backButton";
+    backButton.textContent = "Back";
+    backButton.addEventListener("click", function() {
+      window.location.href = "index.html"; // Redirect to index.html
+    });
     
+    searchResult.appendChild(backButton);
+  } else {
+    // Redirect to home or index page
+    window.location.href = "index.html"; // Change the URL as needed
+  }
+}
+ 
+  
+  
   </script>
 </body>
 </html>
